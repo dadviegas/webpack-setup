@@ -4,7 +4,7 @@ import {
   define, babel, stats, optimize,
   configurationGenerator, compiler,
   analyzer, plugins, module
-} from 'webpack-configuration'
+} from 'melpack-configuration'
 import html from './modules/html'
 import style from './modules/style'
 import path from 'path'

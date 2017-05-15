@@ -4,7 +4,7 @@ import {
   define, babel, stats, optimize,
   configurationGenerator, compiler,
   analyzer, plugins, module
-} from 'webpack-configuration'
+} from 'melpack-configuration'
 
 const confArray = [
   analyzer(),

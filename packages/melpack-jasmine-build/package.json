@@ -1,6 +1,6 @@
 {
-  "name": "webpack-jasmine-builder",
-  "version": "1.0.1",
+  "name": "melpack-jasmine-build",
+  "version": "2.0.0",
   "description": "",
   "main": "./lib/",
   "scripts": {

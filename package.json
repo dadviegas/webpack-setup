@@ -1,6 +1,6 @@
 {
-  "name": "webpack-module-builder",
-  "version": "1.0.0",
+  "name": "melpack-module-builder",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {

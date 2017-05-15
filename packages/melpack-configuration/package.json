@@ -1,6 +1,6 @@
 {
-  "name": "webpack-configuration",
-  "version": "1.0.1",
+  "name": "melpack-configuration",
+  "version": "2.0.0",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {

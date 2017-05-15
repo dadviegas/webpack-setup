@@ -1,6 +1,6 @@
 {
   "name": "webpack-jasmine-builder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./lib/",
   "scripts": {
@@ -26,8 +26,8 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.3",
-    "webpack": "^2.5.0",
     "standard": "^10.0.2",
+    "webpack": "^2.5.0",
     "whatwg-fetch": "^2.0.3"
   },
   "engines": {

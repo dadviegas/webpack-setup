@@ -1,0 +1,22 @@
+{
+  "name": "webpack-module-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "lerna init",
+    "build": "lerna run build",
+    "bootstrap": "lerna bootstrap",
+    "bootstrap:hoist": "lerna bootstrap --hoist",
+    "clean": "lerna clean && rm -rf node_modules",
+    "publish": "npm run build && lerna publish"
+  },
+  "engines": {
+    "node": ">6.0"
+  },
+  "author": "dadviegas",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^2.0.0-rc.4"
+  }
+}

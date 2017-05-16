@@ -1,6 +1,6 @@
 {
   "name": "melpack-web-builder",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "",
   "main": "./lib",
   "scripts": {

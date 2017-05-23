@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.compiler = exports.setup = exports.plugins = exports.module = exports.configurationGenerator = exports.optimize = exports.stats = exports.babel = exports.define = exports.resolve = exports.output = exports.entry = exports.base = exports.compose = exports.pipe = undefined;
+exports.compiler = exports.setup = exports.plugins = exports.module = exports.optimize = exports.stats = exports.babel = exports.define = exports.resolve = exports.output = exports.entry = exports.base = exports.compose = exports.pipe = undefined;
 
 var _melpackConfiguration = require('melpack-configuration');
 
@@ -33,7 +33,6 @@ exports.define = _melpackConfiguration.define;
 exports.babel = _melpackConfiguration.babel;
 exports.stats = _melpackConfiguration.stats;
 exports.optimize = _melpackConfiguration.optimize;
-exports.configurationGenerator = _melpackConfiguration.configurationGenerator;
 exports.module = _melpackConfiguration.module;
 exports.plugins = _melpackConfiguration.plugins;
 exports.setup = setup;

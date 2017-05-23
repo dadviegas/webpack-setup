@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.compiler = exports.configurationGenerator = exports.webpack = exports.stats = exports.babel = exports.define = exports.resolve = exports.module = exports.output = exports.entry = exports.base = exports.plugins = exports.optimize = exports.analyzer = exports.compose = exports.pipe = undefined;
+exports.dashboard = exports.webpack = exports.stats = exports.babel = exports.define = exports.resolve = exports.module = exports.output = exports.entry = exports.base = exports.plugins = exports.optimize = exports.analyzer = exports.compose = exports.pipe = exports.setup = undefined;
 
 var _helpers = require('./modules/helpers');
 
@@ -30,6 +30,10 @@ var _define2 = _interopRequireDefault(_define);
 var _base = require('./modules/base');
 
 var _base2 = _interopRequireDefault(_base);
+
+var _dashboard = require('./modules/dashboard');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
 
 var _babel = require('./modules/babel');
 
@@ -59,23 +63,63 @@ var _gulpUtil = require('gulp-util');
 
 var _gulpUtil2 = _interopRequireDefault(_gulpUtil);
 
+var _webpackDevServer = require('webpack-dev-server');
+
+var _webpackDevServer2 = _interopRequireDefault(_webpackDevServer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var enviromnentSetup = (0, _helpers.setup)();
+var confArray = [];
+var generateConfiguration = function generateConfiguration(setup) {
+  return (0, _helpers.configurationGenerator)(_helpers.pipe.apply(_helpers.pipe, confArray))(setup);
+};
+var getConfiguration = function getConfiguration(setup) {
+  return generateConfiguration(setup).build;
+};
+var addConfiguration = function addConfiguration() {
+  for (var _len = arguments.length, elements = Array(_len), _key = 0; _key < _len; _key++) {
+    elements[_key] = arguments[_key];
+  }
 
-var configurationGenerator = function configurationGenerator(composeWebpack) {
-  return (0, _helpers.compose)(enviromnentSetup, composeWebpack);
+  return Array.prototype.push.apply(confArray, elements);
 };
 
 var compiler = function compiler(setup) {
-  return (0, _webpack2.default)(setup, function (err, result) {
+  var webpackConf = generateConfiguration(setup);
+  return (0, _webpack2.default)(webpackConf.build, function (err, result) {
     if (err) {
       throw new _gulpUtil2.default.PluginError('webpack:build', err);
     }
-    _gulpUtil2.default.log('[webpack:build]', result.toString(setup.stats));
+    _gulpUtil2.default.log('[webpack:build]', result.toString(webpackConf.build.stats));
   });
 };
 
+var server = function server(setup) {
+  var webpackConf = generateConfiguration(setup);
+
+  var url = 'http://localhost:' + webpackConf.build.devServer.port;
+
+  webpackConf.build.entry.index.unshift('react-hot-loader/patch', 'webpack-dev-server/client?/' + url, 'webpack/hot/dev-server');
+
+  var wpCompiler = compiler(webpackConf.build);
+  new _webpackDevServer2.default(wpCompiler, webpackConf.build.devServer).listen(webpackConf.build.devServer.port, 'localhost', function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+
+    console.log('Listening at ' + url);
+  });
+};
+
+var setup = {
+  init: function init() {},
+  add: addConfiguration,
+  resolve: getConfiguration,
+  server: server,
+  compiler: compiler
+};
+
+exports.setup = setup;
 exports.pipe = _helpers.pipe;
 exports.compose = _helpers.compose;
 exports.analyzer = _analyzer2.default;
@@ -90,5 +134,4 @@ exports.define = _define2.default;
 exports.babel = _babel2.default;
 exports.stats = _stats2.default;
 exports.webpack = _webpack2.default;
-exports.configurationGenerator = configurationGenerator;
-exports.compiler = compiler;
+exports.dashboard = _dashboard2.default;

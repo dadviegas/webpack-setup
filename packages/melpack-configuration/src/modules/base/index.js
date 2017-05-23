@@ -2,16 +2,22 @@ import merge from 'webpack-merge'
 
 export default (options = {}) => (setup = {}) => {
   const configuration = {
-    watch: false,
     devtool: setup.isDevelopment ? 'inline-source-map' : 'cheap-source-map',
     context: setup.paths.source,
     performance: {
-      hints: 'warning'
+      hints: setup.isProduction ? 'warning' : false
     },
     devServer: {
       contentBase: setup.paths.contentBase,
-      compress: true,
-      port: 8181
+      publicPath: '/',
+      port: 8001,
+      historyApiFallback: true,
+      noInfo: false,
+      headers: { 'X-Custom-Header': 'yes' },
+      stats: {
+        colors: true
+      },
+      hot: true
     },
     ...options
   }

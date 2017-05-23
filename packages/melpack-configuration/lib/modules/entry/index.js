@@ -9,7 +9,7 @@ var _helpers = require('../helpers');
 exports.default = function (options) {
   return (0, _helpers.generator)({
     entry: options || {
-      index: './index.js'
+      index: ['./index.js']
     }
   });
 };

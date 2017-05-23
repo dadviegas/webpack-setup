@@ -5,9 +5,7 @@ export default (options = {}) => (setup = {}) => {
     output: {
       filename: `[name].js`,
       chunkFilename: '[id].chunk.js',
-      libraryTarget: 'umd',
       path: setup.paths.target,
-      publicPath: setup.target,
       ...options
     }
   }

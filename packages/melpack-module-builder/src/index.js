@@ -27,7 +27,7 @@ export {
   pipe, compose,
   base, entry, output, resolve,
   define, babel, stats, optimize,
-  configurationGenerator, module,
+  module,
   plugins,
   setup,
   compiler

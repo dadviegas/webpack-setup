@@ -1,5 +1,5 @@
 import plugins from '../plugins'
-import webpack from 'webpack'
+import dashboard from '../dashboard'
 
 const getReleaseFlags = (releaseFlags = {}) => {
   const data = {}
@@ -15,23 +15,22 @@ const getReleaseFlags = (releaseFlags = {}) => {
 }
 
 export default (options = {}) => (setup = {}) => {
-  let releaseFlags = {}
-  const environment = plugins(new webpack.EnvironmentPlugin({
+  const environment = new setup.webpack.EnvironmentPlugin({
     NODE_ENV: setup.environment,
     DEBUG: setup.isStaging || setup.isDevelopment || setup.isLocal
-  }))
+  })
 
-  if (options !== {}) {
-    releaseFlags = plugins(new webpack.DefinePlugin({
-      ...getReleaseFlags({
-        RF_ENVIRONMENT: setup.environment,
-        ...options
-      })
-    }))
-  }
+  const releaseFlags = new setup.webpack.DefinePlugin({
+    ...getReleaseFlags({
+      RF_ENVIRONMENT: setup.environment,
+      ...options
+    })
+  })
 
-  environment(setup)
-  releaseFlags(setup)
+  plugins([environment, releaseFlags])(setup)
+
+  dashboard()(setup)
+  plugins(new setup.webpack.HotModuleReplacementPlugin())(setup)
 
   return setup
 }

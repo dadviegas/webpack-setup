@@ -21,9 +21,7 @@ exports.default = function () {
       output: _extends({
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
-        libraryTarget: 'umd',
-        path: setup.paths.target,
-        publicPath: setup.target
+        path: setup.paths.target
       }, options)
     };
 

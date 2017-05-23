@@ -1,42 +1,30 @@
 import {
   pipe, compose,
   base, entry, output, resolve,
-  define, babel, stats, optimize,
-  configurationGenerator, compiler,
-  analyzer, plugins, module
+  define, babel, optimize, stats,
+  analyzer, plugins, module, setup
 } from 'melpack-configuration'
 import html from './modules/html'
 import style from './modules/style'
-import path from 'path'
-const confArray = [
-  analyzer(),
+
+setup.add(
   base(),
   entry(),
   output(),
-  resolve({
-    modules: [
-      path.join(__dirname, 'node_modules')
-    ]
-  }),
+  resolve(),
   babel(),
   stats(),
   optimize()
-]
-
-const setup = {
-  init: () => {},
-  add: (...elements) => Array.prototype.push.apply(confArray, elements),
-  build: (setup) => configurationGenerator(pipe.apply(pipe, confArray))(setup)
-}
+)
 
 export {
+  analyzer,
   pipe, compose,
   base, entry, output, resolve,
-  define, babel, stats, optimize,
-  configurationGenerator, module,
+  define, babel, optimize,
+  module,
   plugins,
   setup,
-  compiler,
   html,
   style
 }

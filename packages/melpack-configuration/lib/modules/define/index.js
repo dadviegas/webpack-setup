@@ -10,9 +10,9 @@ var _plugins = require('../plugins');
 
 var _plugins2 = _interopRequireDefault(_plugins);
 
-var _webpack = require('webpack');
+var _dashboard = require('../dashboard');
 
-var _webpack2 = _interopRequireDefault(_webpack);
+var _dashboard2 = _interopRequireDefault(_dashboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,20 +36,19 @@ exports.default = function () {
   return function () {
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var releaseFlags = {};
-    var environment = (0, _plugins2.default)(new _webpack2.default.EnvironmentPlugin({
+    var environment = new setup.webpack.EnvironmentPlugin({
       NODE_ENV: setup.environment,
       DEBUG: setup.isStaging || setup.isDevelopment || setup.isLocal
-    }));
+    });
 
-    if (options !== {}) {
-      releaseFlags = (0, _plugins2.default)(new _webpack2.default.DefinePlugin(_extends({}, getReleaseFlags(_extends({
-        RF_ENVIRONMENT: setup.environment
-      }, options)))));
-    }
+    var releaseFlags = new setup.webpack.DefinePlugin(_extends({}, getReleaseFlags(_extends({
+      RF_ENVIRONMENT: setup.environment
+    }, options))));
 
-    environment(setup);
-    releaseFlags(setup);
+    (0, _plugins2.default)([environment, releaseFlags])(setup);
+
+    (0, _dashboard2.default)()(setup);
+    (0, _plugins2.default)(new setup.webpack.HotModuleReplacementPlugin())(setup);
 
     return setup;
   };

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setup = exports.generator = exports.pipe = exports.compose = undefined;
+exports.configurationGenerator = exports.settingsGenerator = exports.generator = exports.pipe = exports.compose = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -44,7 +44,7 @@ var generator = exports.generator = function generator() {
   };
 };
 
-var setup = exports.setup = function setup() {
+var settingsGenerator = exports.settingsGenerator = function settingsGenerator() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return function () {
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -66,10 +66,10 @@ var setup = exports.setup = function setup() {
         nodeModules: _path2.default.join(process.cwd(), 'node_modules')
       },
       optimize: {
+        analyzer: setup.optimize ? setup.optimize.analyzer : false,
         applyVersion: setup.optimize ? setup.optimize.applyVersion : false,
         applyCommonsChunk: setup.optimize ? setup.optimize.applyCommonsChunk : false
-      },
-      analyzer: setup.analyzer
+      }
     }, setup, options, {
       merge: _webpackMerge2.default,
       webpack: _webpack2.default
@@ -79,4 +79,8 @@ var setup = exports.setup = function setup() {
 
     return setup;
   };
+};
+
+var configurationGenerator = exports.configurationGenerator = function configurationGenerator(composeWebpack) {
+  return compose(settingsGenerator(), composeWebpack);
 };

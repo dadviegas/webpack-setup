@@ -1,5 +1,3 @@
-import merge from 'webpack-merge'
-
 export default (options) => (setup) => {
   let configuration
   if (options instanceof Array) {
@@ -16,6 +14,6 @@ export default (options) => (setup) => {
     }
   }
 
-  setup.build = merge(setup.build, configuration)
+  setup.build = setup.merge(setup.build, configuration)
   return setup
 }

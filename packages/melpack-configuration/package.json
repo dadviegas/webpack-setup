@@ -17,10 +17,13 @@
     "babel-preset-stage-2": "^6.24.1",
     "chunk-manifest-webpack2-plugin": "^1.0.1",
     "gulp-util": "^3.0.8",
+    "react-hot-loader": "^3.0.0-beta.7",
     "standard": "^10.0.2",
     "webpack": "^2.5.0",
     "webpack-bundle-analyzer": "^2.6.0",
     "webpack-chunk-hash": "^0.4.0",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0"
   },
   "standard": {

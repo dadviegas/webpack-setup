@@ -15,7 +15,7 @@ export default (options = {}) => (setup = {}) => {
   }
 
   if (setup.isProduction || setup.isQA) {
-    configuration.plugins.unshift(
+    configuration.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           unused: true,    // Enables tree shaking

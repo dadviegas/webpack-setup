@@ -10,7 +10,7 @@ export const generator = (options = {}) => (setup = {}) => {
   return setup
 }
 
-export const setup = (options = {}) => (setup = {}) => {
+export const settingsGenerator = (options = {}) => (setup = {}) => {
   const environment = setup.environment || 'development'
   setup = {
     environment: environment,
@@ -28,10 +28,10 @@ export const setup = (options = {}) => (setup = {}) => {
       nodeModules: path.join(process.cwd(), 'node_modules')
     },
     optimize: {
+      analyzer: setup.optimize ? setup.optimize.analyzer : false,
       applyVersion: setup.optimize ? setup.optimize.applyVersion : false,
       applyCommonsChunk: setup.optimize ? setup.optimize.applyCommonsChunk : false
     },
-    analyzer: setup.analyzer,
     ...setup,
     ...options,
     merge,
@@ -42,3 +42,5 @@ export const setup = (options = {}) => (setup = {}) => {
 
   return setup
 }
+
+export const configurationGenerator = (composeWebpack) => compose(settingsGenerator(), composeWebpack)

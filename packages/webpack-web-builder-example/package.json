@@ -1,0 +1,50 @@
+{
+  "name": "melpack-web-builder-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "pretest": "standard",
+    "build": "webpack --env.environment=development",
+    "build:qa": "webpack -p --env.environment=qa",
+    "build:prod": "webpack -p --env.environment=production",
+    "dev": "webpack-dashboard -- webpack-dev-server --inline --hot --env.environment=development",
+    "test": "babel-node ./test.js",
+    "start": "standard && babel-node ./server.js",
+    "server": "http-server ./dist -p 3000 -i"
+  },
+  "author": "dadviegas",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "standard": "^10.0.2",
+    "melpack-web-builder": "^2.0.8",
+    "melpack-jasmine-build": "^2.0.1",
+    "melpack-module-builder": "^2.0.6"
+  },
+  "standard": {
+    "ignore": [
+      "/dist/"
+    ],
+    "globals": [
+      "it",
+      "xit",
+      "describe",
+      "beforeEach",
+      "before",
+      "expect",
+      "spyOn",
+      "beforeAll",
+      "jasmine",
+      "afterEach",
+      "fetch",
+      "RF_DEBUG",
+      "RF_ENVIRONMENT",
+      "RF_RELEASE_STAGE"
+    ]
+  }
+}

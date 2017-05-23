@@ -38,7 +38,7 @@ exports.default = function () {
     };
 
     if (setup.isProduction || setup.isQA) {
-      configuration.plugins.unshift(new _webpack2.default.optimize.UglifyJsPlugin({
+      configuration.plugins.push(new _webpack2.default.optimize.UglifyJsPlugin({
         compress: {
           unused: true, // Enables tree shaking
           dead_code: true, // Enables tree shaking

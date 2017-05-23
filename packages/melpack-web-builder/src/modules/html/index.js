@@ -1,10 +1,11 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 
 export default (options) => (setup) => {
   const {
     template = 'template.html',
     title = '',
-    filename = 'index.html',
+    filename = './index.html',
     chunks,
     commonChunks = ['vendor', 'manifest', 'commons']
   } = options
@@ -23,7 +24,7 @@ export default (options) => (setup) => {
     const page = {
       title: title,
       filename: filename,
-      template: template,
+      template: path.resolve(process.cwd(), template),
       minify: {
         removeComments: true,
         collapseWhitespace: true,

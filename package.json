@@ -2,7 +2,6 @@
   "name": "melpack-module-builder",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "init": "lerna init",
     "build": "lerna run build",

@@ -2,6 +2,7 @@ import merge from 'webpack-merge'
 
 export default (options = {}) => (setup = {}) => {
   const configuration = {
+    watch: false,
     devtool: setup.isDevelopment ? 'inline-source-map' : 'cheap-source-map',
     context: setup.paths.source,
     performance: {

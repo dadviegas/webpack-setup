@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Styles
-import 'assets/Header.scss'
+import 'assets/header.scss'
 
 function Header () {
   return (

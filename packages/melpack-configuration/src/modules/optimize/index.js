@@ -1,5 +1,4 @@
-import merge from 'webpack-merge'
-import webpack from 'webpack'
+import plugins from '../plugins'
 import WebpackChunkHash from 'webpack-chunk-hash'
 import ChunkManifestPlugin from 'chunk-manifest-webpack2-plugin'
 
@@ -8,15 +7,11 @@ const fileNameGeneratePattern = (options) => {
 }
 
 export default (options = {}) => (setup = {}) => {
-  const configuration = {
-    plugins: [
-      new webpack.NoEmitOnErrorsPlugin()
-    ]
-  }
+  plugins(new setup.webpack.NoEmitOnErrorsPlugin())(setup)
 
   if (setup.isProduction || setup.isQA) {
-    configuration.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
+    plugins([
+      new setup.webpack.optimize.UglifyJsPlugin({
         compress: {
           unused: true,    // Enables tree shaking
           dead_code: true, // Enables tree shaking
@@ -35,47 +30,50 @@ export default (options = {}) => (setup = {}) => {
         },
         sourceMap: true
       }),
-      new webpack.LoaderOptionsPlugin({
+      new setup.webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
         options: {
           context: process.cwd()
         }
       })
-    )
+    ])(setup)
+  }
+  plugins([
+    new setup.webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest'],
+      minChunks: Infinity
+    })
+  ])
+  if (setup.optimize.applyVersion) {
+    plugins([
+      // new setup.webpack.optimize.CommonsChunkPlugin({
+      //   name: ['vendor', 'manifest'],
+      //   minChunks: Infinity
+      // }),
+      new setup.webpack.HashedModuleIdsPlugin(),
+      new WebpackChunkHash(),
+      new ChunkManifestPlugin({
+        filename: 'chunk-manifest.json',
+        manifestVariable: 'webpackManifest'
+      })
+    ])(setup)
 
-    if (setup.optimize.applyVersion) {
-      configuration.plugins.unshift([
-        new webpack.optimize.CommonsChunkPlugin({
-          name: setup.applyManifest ? ['vendor', 'manifest'] : ['vendor'],
-          minChunks: Infinity
-        }),
-        new webpack.HashedModuleIdsPlugin(),
-        new WebpackChunkHash(),
-        new ChunkManifestPlugin({
-          filename: 'chunk-manifest.json',
-          manifestVariable: 'webpackManifest'
-        })
-      ])
-
-      setup.build.output = {
-        ...setup.build.output,
-        filename: fileNameGeneratePattern(setup),
-        chunkFilename: fileNameGeneratePattern(setup)
-      }
+    setup.build.output = {
+      ...setup.build.output,
+      filename: fileNameGeneratePattern(setup),
+      chunkFilename: fileNameGeneratePattern(setup)
     }
+  }
 
-    if (setup.optimize.applyCommonsChunk) {
-      configuration.plugins.push([
-        new webpack.optimize.CommonsChunkPlugin({
-          name: 'commons',
-          filename: 'commons.[chunkhash].js',
-          minChunks: 3
-        })
-      ])
-    }
-
-    setup.build = merge(setup.build, configuration)
+  if (setup.optimize.applyCommonsChunk) {
+    plugins([
+      new setup.webpack.optimize.CommonsChunkPlugin({
+        name: 'commons',
+        filename: 'commons.[chunkhash].js',
+        minChunks: 3
+      })
+    ])(setup)
   }
 
   return setup

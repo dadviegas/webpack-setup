@@ -1,9 +1,6 @@
 export default (options = {}) => (setup = {}) => {
   const configuration = {
-    output: {
-      filename: `[name].js`,
-      chunkFilename: '[id].chunk.js',
-      path: setup.paths.target,
+    externals: {
       ...options
     }
   }

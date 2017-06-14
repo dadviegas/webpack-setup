@@ -10,10 +10,6 @@ var _plugins = require('../plugins');
 
 var _plugins2 = _interopRequireDefault(_plugins);
 
-var _dashboard = require('../dashboard');
-
-var _dashboard2 = _interopRequireDefault(_dashboard);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getReleaseFlags = function getReleaseFlags() {
@@ -38,7 +34,7 @@ exports.default = function () {
 
     var environment = new setup.webpack.EnvironmentPlugin({
       NODE_ENV: setup.environment,
-      DEBUG: setup.isStaging || setup.isDevelopment || setup.isLocal
+      DEBUG: !setup.isProduction
     });
 
     var releaseFlags = new setup.webpack.DefinePlugin(_extends({}, getReleaseFlags(_extends({
@@ -46,10 +42,6 @@ exports.default = function () {
     }, options))));
 
     (0, _plugins2.default)([environment, releaseFlags])(setup);
-
-    (0, _dashboard2.default)()(setup);
-    (0, _plugins2.default)(new setup.webpack.HotModuleReplacementPlugin())(setup);
-
     return setup;
   };
 };

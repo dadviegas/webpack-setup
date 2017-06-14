@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react'
-
+import 'assets/index.scss'
 // Components
 import Header from './header'
 import Content from './content'

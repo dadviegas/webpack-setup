@@ -5,12 +5,12 @@
   "main": "./lib/index.js",
   "scripts": {
     "pretest": "standard",
-    "build": "webpack --env.environment=development",
+    "build": "npm run build:dev",
+    "build:dev": "webpack --env.environment=development",
     "build:qa": "webpack -p --env.environment=qa",
-    "build:prod": "webpack -p --env.environment=production",
-    "dev": "webpack-dashboard -- webpack-dev-server --inline --hot --env.environment=development",
+    "build:production": "webpack -p --env.environment=production",
+    "start": "webpack-dev-server --env.environment=development",
     "test": "babel-node ./test.js",
-    "start": "standard && babel-node ./server.js",
     "server": "http-server ./dist -p 3000 -i"
   },
   "author": "dadviegas",

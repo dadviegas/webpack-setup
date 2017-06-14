@@ -1,5 +1,4 @@
 import plugins from '../plugins'
-import dashboard from '../dashboard'
 
 const getReleaseFlags = (releaseFlags = {}) => {
   const data = {}
@@ -17,7 +16,7 @@ const getReleaseFlags = (releaseFlags = {}) => {
 export default (options = {}) => (setup = {}) => {
   const environment = new setup.webpack.EnvironmentPlugin({
     NODE_ENV: setup.environment,
-    DEBUG: setup.isStaging || setup.isDevelopment || setup.isLocal
+    DEBUG: !setup.isProduction
   })
 
   const releaseFlags = new setup.webpack.DefinePlugin({
@@ -28,9 +27,5 @@ export default (options = {}) => (setup = {}) => {
   })
 
   plugins([environment, releaseFlags])(setup)
-
-  dashboard()(setup)
-  plugins(new setup.webpack.HotModuleReplacementPlugin())(setup)
-
   return setup
 }

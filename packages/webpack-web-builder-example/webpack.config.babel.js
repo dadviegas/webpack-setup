@@ -1,27 +1,36 @@
 import {
+  entry,
   setup,
   html,
   style,
-  define
+  define,
+  hotReload, babel
 } from 'melpack-web-builder'
 
 setup.add(
+  entry({
+    index: ['./index.js'],
+    vendor: ['react', 'react-dom']
+  }),
   html({
     filename: 'index.html',
     template: './src/index.html',
-    chunks: ['index']
+    chunks: ['vendor', 'index']
   }),
   style(),
-  define()
+  babel(),
+  define(),
+  hotReload()
 )
 
 export default (env = {}) => {
   const conf = {
     ...env,
     target: './dist',
+    applyManifest: true,
     optimize: {
       analyzer: false,
-      applyVersion: false,
+      applyVersion: true,
       applyCommonsChunk: false
     }
   }

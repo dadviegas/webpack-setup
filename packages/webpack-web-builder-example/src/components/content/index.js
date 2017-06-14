@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Styles
-import 'assets/Content.scss'
+import 'assets/content.scss'
 
 class Content extends React.Component {
   constructor (props) {

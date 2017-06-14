@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -12,11 +12,7 @@ exports.default = function () {
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var configuration = {
-      output: _extends({
-        filename: '[name].js',
-        chunkFilename: '[id].chunk.js',
-        path: setup.paths.target
-      }, options)
+      externals: _extends({}, options)
     };
 
     setup.build = setup.merge(setup.build, configuration);

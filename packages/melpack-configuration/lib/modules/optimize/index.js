@@ -6,13 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _webpackMerge = require('webpack-merge');
+var _plugins = require('../plugins');
 
-var _webpackMerge2 = _interopRequireDefault(_webpackMerge);
-
-var _webpack = require('webpack');
-
-var _webpack2 = _interopRequireDefault(_webpack);
+var _plugins2 = _interopRequireDefault(_plugins);
 
 var _webpackChunkHash = require('webpack-chunk-hash');
 
@@ -33,12 +29,10 @@ exports.default = function () {
   return function () {
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var configuration = {
-      plugins: [new _webpack2.default.NoEmitOnErrorsPlugin()]
-    };
+    (0, _plugins2.default)(new setup.webpack.NoEmitOnErrorsPlugin())(setup);
 
     if (setup.isProduction || setup.isQA) {
-      configuration.plugins.push(new _webpack2.default.optimize.UglifyJsPlugin({
+      (0, _plugins2.default)([new setup.webpack.optimize.UglifyJsPlugin({
         compress: {
           unused: true, // Enables tree shaking
           dead_code: true, // Enables tree shaking
@@ -56,38 +50,41 @@ exports.default = function () {
           comments: false
         },
         sourceMap: true
-      }), new _webpack2.default.LoaderOptionsPlugin({
+      }), new setup.webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
         options: {
           context: process.cwd()
         }
-      }));
+      })])(setup);
+    }
+    (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest'],
+      minChunks: Infinity
+    })]);
+    if (setup.optimize.applyVersion) {
+      (0, _plugins2.default)([
+      // new setup.webpack.optimize.CommonsChunkPlugin({
+      //   name: ['vendor', 'manifest'],
+      //   minChunks: Infinity
+      // }),
+      new setup.webpack.HashedModuleIdsPlugin(), new _webpackChunkHash2.default(), new _chunkManifestWebpack2Plugin2.default({
+        filename: 'chunk-manifest.json',
+        manifestVariable: 'webpackManifest'
+      })])(setup);
 
-      if (setup.optimize.applyVersion) {
-        configuration.plugins.unshift([new _webpack2.default.optimize.CommonsChunkPlugin({
-          name: setup.applyManifest ? ['vendor', 'manifest'] : ['vendor'],
-          minChunks: Infinity
-        }), new _webpack2.default.HashedModuleIdsPlugin(), new _webpackChunkHash2.default(), new _chunkManifestWebpack2Plugin2.default({
-          filename: 'chunk-manifest.json',
-          manifestVariable: 'webpackManifest'
-        })]);
+      setup.build.output = _extends({}, setup.build.output, {
+        filename: fileNameGeneratePattern(setup),
+        chunkFilename: fileNameGeneratePattern(setup)
+      });
+    }
 
-        setup.build.output = _extends({}, setup.build.output, {
-          filename: fileNameGeneratePattern(setup),
-          chunkFilename: fileNameGeneratePattern(setup)
-        });
-      }
-
-      if (setup.optimize.applyCommonsChunk) {
-        configuration.plugins.push([new _webpack2.default.optimize.CommonsChunkPlugin({
-          name: 'commons',
-          filename: 'commons.[chunkhash].js',
-          minChunks: 3
-        })]);
-      }
-
-      setup.build = (0, _webpackMerge2.default)(setup.build, configuration);
+    if (setup.optimize.applyCommonsChunk) {
+      (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
+        name: 'commons',
+        filename: 'commons.[chunkhash].js',
+        minChunks: 3
+      })])(setup);
     }
 
     return setup;

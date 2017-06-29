@@ -1,6 +1,6 @@
 {
   "name": "melpack-configuration",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -18,10 +18,10 @@
     "babel-preset-stage-2": "^6.24.1",
     "chunk-manifest-webpack2-plugin": "^1.0.1",
     "css-loader": "^0.28.1",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "loader-utils": "^1.1.0",
-    "melpack-configuration": "^2.0.2",
+    "melpack-configuration": "^2.0.3",
     "node-sass": "^4.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

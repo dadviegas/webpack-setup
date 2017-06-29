@@ -12,6 +12,7 @@ export const generator = (options = {}) => (setup = {}) => {
 
 export const settingsGenerator = (options = {}) => (setup = {}) => {
   const environment = setup.environment || 'development'
+  const analyzer = setup.analyzer
   setup = {
     environment: environment,
     isProduction: environment === 'production',
@@ -24,11 +25,11 @@ export const settingsGenerator = (options = {}) => (setup = {}) => {
       root: path.resolve(process.cwd()),
       source: path.resolve(process.cwd(), setup.source || './src'),
       assets: path.resolve(process.cwd(), setup.assets || './assets'),
-      target: path.resolve(process.cwd(), setup.target || './lib'),
+      target: path.resolve(process.cwd(), setup.target || './build'),
       nodeModules: path.join(process.cwd(), 'node_modules')
     },
+    analyzer: analyzer,
     optimize: {
-      analyzer: setup.optimize ? setup.optimize.analyzer : false,
       applyVersion: setup.optimize ? setup.optimize.applyVersion : false,
       applyCommonsChunk: setup.optimize ? setup.optimize.applyCommonsChunk : false
     },

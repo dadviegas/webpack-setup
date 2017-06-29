@@ -13,6 +13,8 @@ import plugins from './modules/plugins'
 import dashboard from './modules/dashboard'
 import hotReload from './modules/hotReload'
 import externals from './modules/externals'
+import html from './modules/html'
+import style from './modules/style'
 import webpack from 'webpack'
 
 const confArray = []
@@ -27,6 +29,8 @@ const setup = {
 }
 
 export {
+  html,
+  style,
   hotReload,
   setup,
   pipe,

@@ -16,7 +16,7 @@ const getReleaseFlags = (releaseFlags = {}) => {
 export default (options = {}) => (setup = {}) => {
   const environment = new setup.webpack.EnvironmentPlugin({
     NODE_ENV: setup.environment,
-    DEBUG: !setup.isProduction
+    DEBUG: !setup.isProduction && !setup.isQA
   })
 
   const releaseFlags = new setup.webpack.DefinePlugin({

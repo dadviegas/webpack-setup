@@ -34,7 +34,7 @@ exports.default = function () {
 
     var environment = new setup.webpack.EnvironmentPlugin({
       NODE_ENV: setup.environment,
-      DEBUG: !setup.isProduction
+      DEBUG: !setup.isProduction && !setup.isQA
     });
 
     var releaseFlags = new setup.webpack.DefinePlugin(_extends({}, getReleaseFlags(_extends({

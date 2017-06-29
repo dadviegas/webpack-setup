@@ -50,6 +50,7 @@ var settingsGenerator = exports.settingsGenerator = function settingsGenerator()
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var environment = setup.environment || 'development';
+    var analyzer = setup.analyzer;
     setup = _extends({
       environment: environment,
       isProduction: environment === 'production',
@@ -62,11 +63,11 @@ var settingsGenerator = exports.settingsGenerator = function settingsGenerator()
         root: _path2.default.resolve(process.cwd()),
         source: _path2.default.resolve(process.cwd(), setup.source || './src'),
         assets: _path2.default.resolve(process.cwd(), setup.assets || './assets'),
-        target: _path2.default.resolve(process.cwd(), setup.target || './lib'),
+        target: _path2.default.resolve(process.cwd(), setup.target || './build'),
         nodeModules: _path2.default.join(process.cwd(), 'node_modules')
       },
+      analyzer: analyzer,
       optimize: {
-        analyzer: setup.optimize ? setup.optimize.analyzer : false,
         applyVersion: setup.optimize ? setup.optimize.applyVersion : false,
         applyCommonsChunk: setup.optimize ? setup.optimize.applyCommonsChunk : false
       }

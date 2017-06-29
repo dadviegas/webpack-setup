@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.dashboard = exports.externals = exports.webpack = exports.stats = exports.babel = exports.define = exports.resolve = exports.module = exports.output = exports.entry = exports.base = exports.plugins = exports.optimize = exports.analyzer = exports.compose = exports.pipe = exports.setup = exports.hotReload = undefined;
+exports.dashboard = exports.externals = exports.webpack = exports.stats = exports.babel = exports.define = exports.resolve = exports.module = exports.output = exports.entry = exports.base = exports.plugins = exports.optimize = exports.analyzer = exports.compose = exports.pipe = exports.setup = exports.hotReload = exports.style = exports.html = undefined;
 
 var _helpers = require('./modules/helpers');
 
@@ -63,6 +63,14 @@ var _externals = require('./modules/externals');
 
 var _externals2 = _interopRequireDefault(_externals);
 
+var _html = require('./modules/html');
+
+var _html2 = _interopRequireDefault(_html);
+
+var _style = require('./modules/style');
+
+var _style2 = _interopRequireDefault(_style);
+
 var _webpack = require('webpack');
 
 var _webpack2 = _interopRequireDefault(_webpack);
@@ -90,6 +98,8 @@ var setup = {
   resolve: getConfiguration
 };
 
+exports.html = _html2.default;
+exports.style = _style2.default;
 exports.hotReload = _hotReload2.default;
 exports.setup = setup;
 exports.pipe = _helpers.pipe;

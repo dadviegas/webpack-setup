@@ -34,6 +34,7 @@ exports.default = function () {
 
     var environment = new setup.webpack.EnvironmentPlugin({
       NODE_ENV: setup.environment,
+      BABEL_ENV: setup.environment,
       DEBUG: !setup.isProduction && !setup.isQA
     });
 

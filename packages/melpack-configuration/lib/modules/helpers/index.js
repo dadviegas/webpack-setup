@@ -44,7 +44,8 @@ var generator = exports.generator = function generator() {
   };
 };
 
-var resolvePath = function resolvePath(pathname) {
+var resolvePath = function resolvePath() {
+  var pathname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return _path2.default.resolve(process.cwd(), pathname);
 };
 

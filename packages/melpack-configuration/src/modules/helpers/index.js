@@ -10,7 +10,7 @@ export const generator = (options = {}) => (setup = {}) => {
   return setup
 }
 
-const resolvePath = (pathname) => path.resolve(process.cwd(), pathname)
+const resolvePath = (pathname = '') => path.resolve(process.cwd(), pathname)
 
 export const settingsGenerator = (options = {}) => (setup = {}) => {
   const environment = setup.environment || 'development'

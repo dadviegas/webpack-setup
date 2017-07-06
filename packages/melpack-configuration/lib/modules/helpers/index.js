@@ -44,8 +44,8 @@ var generator = exports.generator = function generator() {
   };
 };
 
-var resolvePath = function resolvePath(path) {
-  return path.resolve(process.cwd(), path);
+var resolvePath = function resolvePath(pathname) {
+  return _path2.default.resolve(process.cwd(), pathname);
 };
 
 var settingsGenerator = exports.settingsGenerator = function settingsGenerator() {

@@ -10,6 +10,8 @@ export const generator = (options = {}) => (setup = {}) => {
   return setup
 }
 
+const resolvePath = (path) => path.resolve(process.cwd(), path)
+
 export const settingsGenerator = (options = {}) => (setup = {}) => {
   const environment = setup.environment || 'development'
   const analyzer = setup.analyzer
@@ -21,11 +23,11 @@ export const settingsGenerator = (options = {}) => (setup = {}) => {
     isDevelopment: environment === 'development',
     isLocal: environment === 'local',
     paths: {
-      contentBase: path.resolve(process.cwd(), './dist'),
-      root: path.resolve(process.cwd()),
-      source: path.resolve(process.cwd(), setup.source || './src'),
-      assets: path.resolve(process.cwd(), setup.assets || './assets'),
-      target: path.resolve(process.cwd(), setup.target || './build'),
+      contentBase: resolvePath(setup.target || './build'),
+      root: resolvePath(),
+      source: resolvePath(setup.source || './src'),
+      assets: resolvePath(setup.assets || './assets'),
+      target: resolvePath(setup.target || './build'),
       nodeModules: path.join(process.cwd(), 'node_modules')
     },
     analyzer: analyzer,

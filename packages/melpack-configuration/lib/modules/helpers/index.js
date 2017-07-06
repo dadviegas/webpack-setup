@@ -44,6 +44,10 @@ var generator = exports.generator = function generator() {
   };
 };
 
+var resolvePath = function resolvePath(path) {
+  return path.resolve(process.cwd(), path);
+};
+
 var settingsGenerator = exports.settingsGenerator = function settingsGenerator() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return function () {
@@ -59,11 +63,11 @@ var settingsGenerator = exports.settingsGenerator = function settingsGenerator()
       isDevelopment: environment === 'development',
       isLocal: environment === 'local',
       paths: {
-        contentBase: _path2.default.resolve(process.cwd(), './dist'),
-        root: _path2.default.resolve(process.cwd()),
-        source: _path2.default.resolve(process.cwd(), setup.source || './src'),
-        assets: _path2.default.resolve(process.cwd(), setup.assets || './assets'),
-        target: _path2.default.resolve(process.cwd(), setup.target || './build'),
+        contentBase: resolvePath(setup.target || './build'),
+        root: resolvePath(),
+        source: resolvePath(setup.source || './src'),
+        assets: resolvePath(setup.assets || './assets'),
+        target: resolvePath(setup.target || './build'),
         nodeModules: _path2.default.join(process.cwd(), 'node_modules')
       },
       analyzer: analyzer,

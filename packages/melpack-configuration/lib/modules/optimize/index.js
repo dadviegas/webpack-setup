@@ -57,34 +57,30 @@ exports.default = function () {
           context: process.cwd()
         }
       })])(setup);
-    }
-    (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
-      minChunks: Infinity
-    })]);
-    if (setup.optimize.applyVersion) {
-      (0, _plugins2.default)([
-      // new setup.webpack.optimize.CommonsChunkPlugin({
-      //   name: ['vendor', 'manifest'],
-      //   minChunks: Infinity
-      // }),
-      new setup.webpack.HashedModuleIdsPlugin(), new _webpackChunkHash2.default(), new _chunkManifestWebpack2Plugin2.default({
-        filename: 'chunk-manifest.json',
-        manifestVariable: 'webpackManifest'
-      })])(setup);
 
-      setup.build.output = _extends({}, setup.build.output, {
-        filename: fileNameGeneratePattern(setup),
-        chunkFilename: fileNameGeneratePattern(setup)
-      });
-    }
+      if (setup.optimize.applyVersion) {
+        (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
+          name: ['vendor', 'manifest'],
+          minChunks: Infinity
+        }), new setup.webpack.HashedModuleIdsPlugin(), new _webpackChunkHash2.default(), new _chunkManifestWebpack2Plugin2.default({
+          filename: 'manifest.json',
+          manifestVariable: 'webpackManifest',
+          inlineManifest: false
+        })])(setup);
 
-    if (setup.optimize.applyCommonsChunk) {
-      (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
-        name: 'commons',
-        filename: 'commons.[chunkhash].js',
-        minChunks: 3
-      })])(setup);
+        setup.build.output = _extends({}, setup.build.output, {
+          filename: fileNameGeneratePattern(setup),
+          chunkFilename: fileNameGeneratePattern(setup)
+        });
+      }
+
+      if (setup.optimize.applyCommonsChunk) {
+        (0, _plugins2.default)([new setup.webpack.optimize.CommonsChunkPlugin({
+          name: 'commons',
+          filename: 'commons.[chunkhash].js',
+          minChunks: 3
+        })])(setup);
+      }
     }
 
     return setup;

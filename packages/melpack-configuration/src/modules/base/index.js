@@ -10,15 +10,14 @@ export default (options = {}) => (setup = {}) => {
     },
     devServer: {
       contentBase: setup.paths.contentBase,
-      publicPath: '/',
-      port: 8001,
       historyApiFallback: true,
       noInfo: false,
       headers: { 'X-Custom-Header': 'yes' },
       stats: {
         colors: true
       },
-      hot: true
+      hot: true,
+      ...setup.devServer
     },
     ...options
   }

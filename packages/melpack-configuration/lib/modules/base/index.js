@@ -24,10 +24,8 @@ exports.default = function () {
       performance: {
         hints: setup.isProduction ? 'warning' : false
       },
-      devServer: {
+      devServer: _extends({
         contentBase: setup.paths.contentBase,
-        publicPath: '/',
-        port: 8001,
         historyApiFallback: true,
         noInfo: false,
         headers: { 'X-Custom-Header': 'yes' },
@@ -35,7 +33,7 @@ exports.default = function () {
           colors: true
         },
         hot: true
-      }
+      }, setup.devServer)
     }, options);
 
     setup.build = (0, _webpackMerge2.default)(setup.build, configuration);

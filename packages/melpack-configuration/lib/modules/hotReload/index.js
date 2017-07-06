@@ -17,7 +17,7 @@ exports.default = function () {
 
     var hotReloadModuled = ['react-hot-loader/patch',
     // activate HMR for React
-    'webpack-dev-server/client?http://localhost:8001',
+    'webpack-dev-server/client?http://localhost:' + setup.devServer.port,
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
     'webpack/hot/only-dev-server'

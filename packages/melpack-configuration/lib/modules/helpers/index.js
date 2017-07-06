@@ -68,8 +68,12 @@ var settingsGenerator = exports.settingsGenerator = function settingsGenerator()
       },
       analyzer: analyzer,
       optimize: {
-        applyVersion: setup.optimize ? setup.optimize.applyVersion : false,
-        applyCommonsChunk: setup.optimize ? setup.optimize.applyCommonsChunk : false
+        applyVersion: options.optimize ? options.optimize.applyVersion : true,
+        applyCommonsChunk: options.optimize ? options.optimize.applyCommonsChunk : true
+      },
+      devServer: {
+        publicPath: options.devServer ? options.devServer.publicPath : '/',
+        port: options.devServer ? options.devServer.port : 3000
       }
     }, setup, options, {
       merge: _webpackMerge2.default,

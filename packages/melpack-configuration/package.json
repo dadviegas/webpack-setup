@@ -1,6 +1,6 @@
 {
   "name": "melpack-configuration",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "loader-utils": "^1.1.0",
-    "melpack-configuration": "^2.0.12",
     "node-sass": "^4.5.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -36,6 +35,10 @@
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.5.0",
     "webpack-merge": "^4.1.0"
+  },
+  "engines": {
+    "node": ">8.0",
+    "npm": ">5.0"
   },
   "standard": {
     "ignore": [

@@ -7,7 +7,7 @@ export default (options) => (setup) => {
     title = '',
     filename = './index.html',
     chunks,
-    commonChunks = ['manifest']
+    commonChunks = ['manifest', 'vendor', 'commons']
   } = options
 
   let chunksToApply

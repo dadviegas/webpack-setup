@@ -24,7 +24,7 @@ exports.default = function (options) {
         filename = _options$filename === undefined ? './index.html' : _options$filename,
         chunks = options.chunks,
         _options$commonChunks = options.commonChunks,
-        commonChunks = _options$commonChunks === undefined ? ['manifest'] : _options$commonChunks;
+        commonChunks = _options$commonChunks === undefined ? ['manifest', 'vendor', 'commons'] : _options$commonChunks;
 
 
     var chunksToApply = void 0;

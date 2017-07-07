@@ -1,6 +1,16 @@
 import module from '../module'
 
 export default (options = {}) => (setup = {}) => {
+  const babelUse = {
+    options: {
+      presets: ['env']
+    }
+  }
+
+  if (setup.isDevelopment) {
+    babelUse.options.plugins = ['react-hot-loader/babel']
+  }
+
   module({
     module: {
       rules: [
@@ -9,7 +19,8 @@ export default (options = {}) => (setup = {}) => {
           exclude: /node_modules/,
           include: setup.paths.source,
           use: {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            ...babelUse
           },
           ...options
         }

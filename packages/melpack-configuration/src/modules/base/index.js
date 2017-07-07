@@ -1,5 +1,3 @@
-import merge from 'webpack-merge'
-
 export default (options = {}) => (setup = {}) => {
   const configuration = {
     watch: false,
@@ -22,6 +20,6 @@ export default (options = {}) => (setup = {}) => {
     ...options
   }
 
-  setup.build = merge(setup.build, configuration)
+  setup.build = setup.merge(setup.build, configuration)
   return setup
 }

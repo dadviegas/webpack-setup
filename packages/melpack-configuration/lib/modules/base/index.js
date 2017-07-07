@@ -6,12 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _webpackMerge = require('webpack-merge');
-
-var _webpackMerge2 = _interopRequireDefault(_webpackMerge);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = function () {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return function () {
@@ -36,7 +30,7 @@ exports.default = function () {
       }, setup.devServer)
     }, options);
 
-    setup.build = (0, _webpackMerge2.default)(setup.build, configuration);
+    setup.build = setup.merge(setup.build, configuration);
     return setup;
   };
 };

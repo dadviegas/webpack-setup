@@ -1,5 +1,3 @@
-import merge from 'webpack-merge'
-
 export default (options = {}) => (setup = {}) => {
   const configuration = {
     resolve: {
@@ -18,6 +16,6 @@ export default (options = {}) => (setup = {}) => {
     }
   }
 
-  setup.build = merge(setup.build, configuration, {resolve: options})
+  setup.build = setup.merge(setup.build, configuration, {resolve: options})
   return setup
 }

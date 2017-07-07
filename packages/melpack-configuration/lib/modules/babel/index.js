@@ -17,15 +17,25 @@ exports.default = function () {
   return function () {
     var setup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+    var babelUse = {
+      options: {
+        presets: ['env', 'es2015', 'stage-2', 'react']
+      }
+    };
+
+    if (setup.isDevelopment) {
+      babelUse.options.plugins = ['react-hot-loader/babel'];
+    }
+
     (0, _module3.default)({
       module: {
         rules: [_extends({
           test: /\.js$/,
           exclude: /node_modules/,
           include: setup.paths.source,
-          use: {
+          use: _extends({
             loader: 'babel-loader'
-          }
+          }, babelUse)
         }, options)]
       }
     })(setup);

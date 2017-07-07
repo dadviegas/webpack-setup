@@ -3,7 +3,7 @@ import module from '../module'
 export default (options = {}) => (setup = {}) => {
   const babelUse = {
     options: {
-      presets: ['env']
+      presets: ['env', 'es2015', 'stage-2', 'react']
     }
   }
 

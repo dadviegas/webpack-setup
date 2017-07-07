@@ -14,16 +14,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (options, webpackConf) {
   delete webpackConf.entry;
-  delete webpackConf.output;
-  webpackConf.devtool = 'inline-source-map';
+  // delete webpackConf.output
+  webpackConf.devtool = 'eval';
 
   _gulp2.default.task('test', function (done) {
     return new _karma.Server({
       webpack: webpackConf,
-      files: ['tests/**/*.js'],
+      files: ['tests/**/*.spec.js'],
       preprocessors: {
         // 'src/**/*.js': ['sourcemap', 'webpack'],
-        'tests/**/*.js': ['sourcemap', 'webpack']
+        'tests/**/*.spec.js': ['sourcemap', 'webpack']
       },
       basePath: '.',
       frameworks: ['jasmine'],

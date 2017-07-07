@@ -3,18 +3,18 @@ import gulp from 'gulp'
 
 export default (options, webpackConf) => {
   delete webpackConf.entry
-  delete webpackConf.output
-  webpackConf.devtool = 'inline-source-map'
+  // delete webpackConf.output
+  webpackConf.devtool = 'eval'
 
   gulp.task('test', function (done) {
     return new Server({
       webpack: webpackConf,
       files: [
-        'tests/**/*.js'
+        'tests/**/*.spec.js'
       ],
       preprocessors: {
         // 'src/**/*.js': ['sourcemap', 'webpack'],
-        'tests/**/*.js': ['sourcemap', 'webpack']
+        'tests/**/*.spec.js': ['sourcemap', 'webpack']
       },
       basePath: '.',
       frameworks: ['jasmine'],

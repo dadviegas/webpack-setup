@@ -29,13 +29,6 @@ export default (options = {}) => (setup = {}) => {
           comments: false
         },
         sourceMap: true
-      }),
-      new setup.webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false,
-        options: {
-          context: process.cwd()
-        }
       })
     ])(setup)
 
